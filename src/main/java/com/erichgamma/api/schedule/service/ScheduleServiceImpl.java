@@ -1,13 +1,11 @@
-package com.erichgamma.api.schedule.Service;
+package com.erichgamma.api.schedule.service;
 
 import com.erichgamma.api.common.component.MessengerVo;
-import com.erichgamma.api.schedule.model.Schedule;
 import com.erichgamma.api.schedule.model.ScheduleDto;
 import com.erichgamma.api.schedule.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;

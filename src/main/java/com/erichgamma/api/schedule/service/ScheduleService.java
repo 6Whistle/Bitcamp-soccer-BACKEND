@@ -1,4 +1,4 @@
-package com.erichgamma.api.schedule.Service;
+package com.erichgamma.api.schedule.service;
 
 import com.erichgamma.api.common.command.CommandService;
 import com.erichgamma.api.common.query.QueryService;

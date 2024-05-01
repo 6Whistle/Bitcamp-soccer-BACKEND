@@ -1,7 +1,6 @@
 package com.erichgamma.api.schedule.controller;
 
-import com.erichgamma.api.schedule.Service.ScheduleService;
-import com.erichgamma.api.schedule.model.Schedule;
+import com.erichgamma.api.schedule.service.ScheduleService;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
