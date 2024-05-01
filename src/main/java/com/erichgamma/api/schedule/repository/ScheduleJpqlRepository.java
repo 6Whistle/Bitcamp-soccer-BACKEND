@@ -12,8 +12,10 @@ import java.util.Map;
 public interface ScheduleJpqlRepository extends JpaRepository<Schedule, Long> {
 
 
-    @Query("SELECT distinct new map((SELECT DISTINCT s.stadiumName FROM stadium s WHERE s.stadiumId = sch.stadiumId)" +
-            "as stadiumName) FROM schedule sch WHERE YEAR(sch.scheDate) = 2012 AND MONTH(sch.scheDate) = 5")
+    @Query("SELECT distinct new map(s.stadiumName AS stadiumName)" +
+            "FROM schedule sch\n" +
+            "JOIN stadium s ON sch.stadiumId = s.stadiumId\n" +
+            "WHERE YEAR(sch.scheDate) = 2012 AND MONTH(sch.scheDate) = 5 ")
     List<Map<String, Object>> getScheduleByDate();
 
     @Query("select new map(s.stadiumName AS stadium,\n" +
