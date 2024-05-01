@@ -2,9 +2,11 @@ package com.erichgamma.api.team.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.erichgamma.api.team.service.TeamService;
@@ -19,27 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
-@RequestMapping("/api")
+@RequestMapping("/api/team")
 public class TeamController {
     private final TeamService teamService;
-
-    @GetMapping("/1")
-    public List<?> getTeams(){
-        return teamService.getTeams();
-    }
-
-    @GetMapping("/12")
-    public List<?> getSuwonDeojeonByHight(){
-        return teamService.getSuwonDeojeonByHeight();
-    }
-
-    @GetMapping("/13")
-    public List<?> getNotSelectedPostion(){
-        return teamService.getNotSelectedPostion();
-    } 
-
-    @GetMapping("/19")
-    public List<?> getHeightAvgByTeam(){
-        return teamService.getHeightAvgByTeam();
-    }
 }
