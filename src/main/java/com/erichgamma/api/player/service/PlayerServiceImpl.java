@@ -121,6 +121,26 @@ public class PlayerServiceImpl implements PlayerService{
         int a = 5;
         return  playerRepository.getOnPositionAndTeamId21(Pageable.ofSize(a));
     }
+
+    @Override
+    public List<?> getOnPositionAndTeamId2() {
+        return playerRepository.getOnPositionAndTeamId2();
+    }
+
+    @Override
+    public List<?> getOnPositionAndTeamIdAndHeight() {
+        return playerRepository.getOnPositionAndTeamIdAndHeight();
+    }
+
+    @Override
+    public List<?> getOnPositionAndTeamIdAndHeight2() {
+        return playerRepository.getOnPositionAndTeamIdAndHeight2();
+    }
+
+    @Override
+    public List<?> getOnPositionAndHeightAndTeamId() {
+        return playerRepository.getOnPositionAndHeightAndTeamId();
+    }
 }
 
 

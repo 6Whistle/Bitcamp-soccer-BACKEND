@@ -26,6 +26,15 @@ public interface PlayerService extends CommandService<PlayerDto>, QueryService<P
 
     List<?> getOnPositionAndTeamId21();
 
+    List<?> getOnPositionAndTeamId2();
+
+    List<?> getOnPositionAndTeamIdAndHeight();
+
+    List<?> getOnPositionAndTeamIdAndHeight2();
+
+    List<?> getOnPositionAndHeightAndTeamId();
+
+
 
 //    default Player dtoToEntity(PlayerDto dto){
 //        return Player.builder()

@@ -44,6 +44,26 @@ public class PlayerController {
         return ResponseEntity.ok(playerService.getOnPositionAndTeamId());
     }
 
+    @GetMapping("/4-1")
+    public ResponseEntity<List<?>> getOnPositionAndTeamId2() throws SQLException {
+        return ResponseEntity.ok(playerService.getOnPositionAndTeamId2());
+    }
+
+    @GetMapping("/5")
+    public ResponseEntity<List<?>> getOnPositionAndTeamIdAndHeight() throws SQLException {
+        return ResponseEntity.ok(playerService.getOnPositionAndTeamIdAndHeight());
+    }
+
+    @GetMapping("/5-1")
+    public ResponseEntity<List<?>> getOnPositionAndTeamIdAndHeight2() throws SQLException {
+        return ResponseEntity.ok(playerService.getOnPositionAndTeamIdAndHeight2());
+    }
+
+    @GetMapping("/6")
+    public ResponseEntity<List<?>> getOnPositionAndHeightAndTeamId() throws SQLException {
+        return ResponseEntity.ok(playerService.getOnPositionAndHeightAndTeamId());
+    }
+
     @GetMapping("/8")
     public ResponseEntity<List<?>> getOnPositionAndTeamId7() throws SQLException {
         return ResponseEntity.ok(playerService.getOnPositionAndTeamId7());
