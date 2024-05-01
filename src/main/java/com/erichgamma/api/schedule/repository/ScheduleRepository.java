@@ -11,16 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
+public interface ScheduleRepository extends ScheduleJpqlRepository {
 
 
-//    @Query("SELECT distinct new map (s.stadiumId as stadiumId, s.scheDate as scheDate, " +
-//            "s.awayScore as awayScore, s.homeScore as homeScore, s.awayteamId as awayteamId," +
-//            "s.hometeamId as hometeamId, s.gubun as gubun ) FROM schedule s WHERE s.stadiumid = :stadiumId")
-
-
-     @Query("SELECT s.stadiumId.stadiumName FROM schedule s WHERE s.scheDate BETWEEN :startDate AND :endDate")
-     List<String> findStadiumNamesByDateRange(String startDate, String endDate);
 
 
 }

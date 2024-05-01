@@ -22,4 +22,5 @@ public class ScheduleDto {
     private String awayteamId;
     private Integer homeScore;
     private Integer awayScore;
+    private String stadiumId;
 }

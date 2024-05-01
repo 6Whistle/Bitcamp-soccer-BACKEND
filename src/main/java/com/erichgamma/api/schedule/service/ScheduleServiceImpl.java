@@ -72,8 +72,5 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
 
-    @Override
-    public List<String> findStadiumNamesByDateRange(String startDate, String endDate) {
-        return scheduleRepository.findStadiumNamesByDateRange("20120501", "20120531");
-    }
+
 }
