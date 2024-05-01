@@ -15,8 +15,8 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Component
 public class PlayerRouter {
-    private  PlayerRepository playerRepository;
-    private  PlayerService playerService;
+    private  final PlayerRepository playerRepository;
+    private  final PlayerService playerService;
 
     public  List<Map<String,Object>> execute(String q ){
         return  switch (q)  {
@@ -27,17 +27,18 @@ public class PlayerRouter {
             case "5" -> playerRepository.getOnPositionAndTeamIdAndHeight();
             case "5-1" -> playerRepository.getOnPositionAndTeamIdAndHeight2();
             case "6" -> playerRepository.getOnPositionAndHeightAndTeamId();
+            case "7" -> playerRepository.getPositionAndeRegion();
             case "8" -> playerRepository.getOnPositionAndTeamId7();
             case "9" -> playerRepository.getOnHeightAndWeight();
             case "10" -> playerRepository.getOnPositionAndTeamId10();
             case "18" -> playerService.getOnCountAll();
             case "20" -> playerRepository.getOnPositionAndTeamId20();
             case "21" -> playerService.getOnPositionAndTeamId21();
+            case "22" -> playerRepository.getHeightAndTeamId()
 
 
             default -> throw new IllegalStateException("Unexpected value: " + q);
         };
-
     }
 
 }

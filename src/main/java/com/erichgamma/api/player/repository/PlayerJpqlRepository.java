@@ -40,7 +40,7 @@ public interface PlayerJpqlRepository extends JpaRepository<Player , Long>  {
             "    p.playerName")
     List<Map<String , Object>> getOnPositionAndTeamId10();
 
-    @Query("SELECT new map (p.teamId.teamId , p.playerName , p.position , p.name , p.backNo , p.nickname , p.solar , p.ePlayerName) FROM player p ")
+    @Query("SELECT new map(p.teamId.teamId , p.playerName , p.position , p.name , p.backNo , p.nickname , p.solar , p.ePlayerName) FROM player p ")
     List<Map<String , Object>> getOnCountAll(Pageable pageable);
 
     @Query("SELECT new MAP ((SELECT t.teamName\n" +
@@ -85,4 +85,23 @@ public interface PlayerJpqlRepository extends JpaRepository<Player , Long>  {
             "                                  (SELECT t.teamId from team t WHERE t.teamName IN ('삼성블루윙즈', '드래곤즈'))")
     List<Map<String , Object>> getOnPositionAndHeightAndTeamId();
 
+    @Query("SELECT new map (p.position , p.teamId.teamId , team .regionName )FROM player p WHERE p.position = 'GK'\n" +
+            "                       AND p.teamId.teamId =\n" +
+            "                           (SELECT t.teamId FROM team t WHERE t.regionName = '수원')")
+    List<Map<String, Object>> getPositionAndeRegion();
+
+
+//    @Query("SELECT p.*\n" +
+//            "FROM player p\n" +
+//            "JOIN (SELECT p2.team_id, ROUND(AVG(p2.height), 2) avg\n" +
+//            "      FROM player p2\n" +
+//            "      where p2.height != ''\n" +
+//            "      GROUP BY p2.team_id) tavg USING (team_id)\n" +
+//            "WHERE p.height != ''\n" +
+//            "  AND p.height < tavg.avg;")
+    @Query("SELECT new  map (p.height) FROM player p\n" +
+            "WHERE p.height < (SELECT ROUND(AVG(tp.height), 2)\n" +
+            "                  FROM player tp\n" +
+            "                  WHERE p.teamId.teamId = tp.teamId.teamId)")
+    List<Map<String, Object>> getHeightAndTeamId();
 }
