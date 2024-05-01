@@ -67,4 +67,29 @@ public interface PlayerRepository extends JpaRepository<Player, Long>{
             ")FROM player p\n" +
             "ORDER BY p.height\n" )
     List<Map<String , Objects>> getOnPositionAndTeamId21(Pageable pageable);
+
+    @Query(value = "SELECT new map( p.position AS POSITION ,p.teamId.teamId ) FROM player p WHERE p.position = 'GK'\n" +
+            "                       AND p.teamId.teamId =\n" +
+            "                           (SELECT t.teamId from team t where t.regionName = '수원')")
+    List<Map<String , Objects>> getOnPositionAndTeamId2();
+
+    @Query("SELECT new map (p.teamId.teamId , p.height , p.playerName) FROM player p\n" +
+            "WHERE p.height >= '170'\n" +
+            "  AND p.playerName LIKE '고%'\n" +
+            "  AND p.teamId.teamId =\n" +
+            "      (SELECT t.teamId FROM team t WHERE t.regionName = '수원')")
+    List<Map<String , Objects>> getOnPositionAndTeamIdAndHeight();
+
+    @Query("SELECT new map (p.teamId.teamId , p.height , p.playerName ) FROM player p JOIN team t on t.teamId = p.teamId.teamId\n" +
+            "         WHERE p.height = '170'\n" +
+            "           AND p.playerName LIKE '고%'\n" +
+            "           AND t.regionName= '수원'")
+    List<Map<String , Objects>> getOnPositionAndTeamIdAndHeight2();
+
+    @Query("SELECT new map (p.playerName,p.position,p.teamId.teamId) FROM player p WHERE p.position = 'MF'\n" +
+//            "                              AND p.height BETWEEN 170 AND 180\n" +
+            "                              AND p.teamId.teamId IN\n" +
+            "                                  (SELECT t.teamId from team t WHERE t.teamName IN ('삼성블루윙즈', '드래곤즈'))")
+    List<Map<String , Objects>> getOnPositionAndHeightAndTeamId();
+
 }
