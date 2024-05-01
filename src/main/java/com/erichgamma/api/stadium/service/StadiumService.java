@@ -7,14 +7,4 @@ import com.erichgamma.api.stadium.model.StadiumDto;
 import java.util.List;
 
 public interface StadiumService extends CommandService<StadiumDto>, QueryService<StadiumDto> {
-
-    List<?> stadiumNameWithTeam();
-
-    List<?> stadiumAndTeamAndSchedule();
-
-    List<?> pohangSteelersGk();
-
-    List<?> homeTeamWin();
-
-    List<?> noHomeTeam();
-}
+    }
