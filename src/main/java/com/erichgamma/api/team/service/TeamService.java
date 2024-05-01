@@ -26,12 +26,4 @@ public interface TeamService extends CommandService<TeamDto>, QueryService<TeamD
         .stadiumId(entity.getStadiumId().getStadiumId())
         .build();
     }
-
-    List<?> getTeams();
-
-    List<?> getNotSelectedPostion();
-
-    List<?> getSuwonDeojeonByHeight();
-
-    List<?> getHeightAvgByTeam();
 }
