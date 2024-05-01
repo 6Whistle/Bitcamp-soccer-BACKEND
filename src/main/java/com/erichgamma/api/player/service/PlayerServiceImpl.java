@@ -1,8 +1,10 @@
 package com.erichgamma.api.player.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
+import com.erichgamma.api.player.repository.PlayerJpqlRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PlayerServiceImpl implements PlayerService{
     private final PlayerRepository playerRepository;
+    private final PlayerJpqlRepository playerJpqlRepository;
 
     @Override
     public MessengerVo save(PlayerDto t) {
@@ -74,37 +77,37 @@ public class PlayerServiceImpl implements PlayerService{
 
     @Override
     public List<?> getOnPosition() {
-        return playerRepository.getOnPosition();
+        return playerJpqlRepository.getOnPosition();
     }
 
 
     @Override
     public List<?> getOnPositionNotNull() {
-        return  playerRepository.getOnPositionNotNull();
+        return  playerJpqlRepository.getOnPositionNotNull();
     }
 
     @Override
     public List<?> getOnPositionAndTeamId() {
-        return  playerRepository.getOnPositionAndTeamId();
+        return  playerJpqlRepository.getOnPositionAndTeamId();
     }
 
     @Override
     public List<?> getOnPositionAndTeamId7() {
-        return  playerRepository.getOnPositionAndTeamId7();
+        return  playerJpqlRepository.getOnPositionAndTeamId7();
     }
 
     @Override
     public List<?> getOnHeightAndWeight() {
-        return  playerRepository.getOnHeightAndWeight();
+        return  playerJpqlRepository.getOnHeightAndWeight();
     }
 
     @Override
     public List<?> getOnPositionAndTeamId10() {
-        return  playerRepository.getOnPositionAndTeamId10();
+        return  playerJpqlRepository.getOnPositionAndTeamId10();
     }
 
     @Override
-    public List<?> getOnCountAll( ) {
+    public List<Map<String,Object>> getOnCountAll( ) {
         int a =5;
         return playerRepository.getOnCountAll(Pageable.ofSize(a));
     }
@@ -117,7 +120,7 @@ public class PlayerServiceImpl implements PlayerService{
     }
 
     @Override
-    public List<?> getOnPositionAndTeamId21() {
+    public List<Map<String,Object>> getOnPositionAndTeamId21() {
         int a = 5;
         return  playerRepository.getOnPositionAndTeamId21(Pageable.ofSize(a));
     }
@@ -129,7 +132,7 @@ public class PlayerServiceImpl implements PlayerService{
 
     @Override
     public List<?> getOnPositionAndTeamIdAndHeight() {
-        return playerRepository.getOnPositionAndTeamIdAndHeight();
+        return playerRepository.getOnPositionAndTeamIdAndHeight().stream().filter(i->Integer.parseInt((String)i.get("height")) >=170).toList();
     }
 
     @Override
