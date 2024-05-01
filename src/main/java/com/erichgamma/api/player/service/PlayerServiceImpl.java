@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class PlayerServiceImpl implements PlayerService{
+public class PlayerServiceImpl implements PlayerService {
     private final PlayerRepository playerRepository;
     private final PlayerJpqlRepository playerJpqlRepository;
 
@@ -75,76 +75,25 @@ public class PlayerServiceImpl implements PlayerService{
     }
 
 
-    @Override
-    public List<?> getOnPosition() {
-        return playerJpqlRepository.getOnPosition();
-    }
 
 
     @Override
-    public List<?> getOnPositionNotNull() {
-        return  playerJpqlRepository.getOnPositionNotNull();
-    }
-
-    @Override
-    public List<?> getOnPositionAndTeamId() {
-        return  playerJpqlRepository.getOnPositionAndTeamId();
-    }
-
-    @Override
-    public List<?> getOnPositionAndTeamId7() {
-        return  playerJpqlRepository.getOnPositionAndTeamId7();
-    }
-
-    @Override
-    public List<?> getOnHeightAndWeight() {
-        return  playerJpqlRepository.getOnHeightAndWeight();
-    }
-
-    @Override
-    public List<?> getOnPositionAndTeamId10() {
-        return  playerJpqlRepository.getOnPositionAndTeamId10();
-    }
-
-    @Override
-    public List<Map<String,Object>> getOnCountAll( ) {
-        int a =5;
+    public List<Map<String, Object>> getOnCountAll() {
+        int a = 5;
         return playerRepository.getOnCountAll(Pageable.ofSize(a));
     }
 
 
 
-    @Override
-    public List<?> getOnPositionAndTeamId20() {
-        return  playerRepository.getOnPositionAndTeamId20();
-    }
 
     @Override
-    public List<Map<String,Object>> getOnPositionAndTeamId21() {
+    public List<Map<String, Object>> getOnPositionAndTeamId21() {
         int a = 5;
-        return  playerRepository.getOnPositionAndTeamId21(Pageable.ofSize(a));
-    }
-
-    @Override
-    public List<?> getOnPositionAndTeamId2() {
-        return playerRepository.getOnPositionAndTeamId2();
-    }
-
-    @Override
-    public List<?> getOnPositionAndTeamIdAndHeight() {
-        return playerRepository.getOnPositionAndTeamIdAndHeight().stream().filter(i->Integer.parseInt((String)i.get("height")) >=170).toList();
-    }
-
-    @Override
-    public List<?> getOnPositionAndTeamIdAndHeight2() {
-        return playerRepository.getOnPositionAndTeamIdAndHeight2();
-    }
-
-    @Override
-    public List<?> getOnPositionAndHeightAndTeamId() {
-        return playerRepository.getOnPositionAndHeightAndTeamId();
+        return playerRepository.getOnPositionAndTeamId21(Pageable.ofSize(a));
     }
 }
+
+
 
 
 

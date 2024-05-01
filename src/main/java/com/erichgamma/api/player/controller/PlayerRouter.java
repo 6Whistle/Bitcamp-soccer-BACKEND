@@ -24,7 +24,7 @@ public class PlayerRouter {
             case "3" -> playerRepository.getOnPositionNotNull();
             case "4" -> playerRepository.getOnPositionAndTeamId();
             case "4-1" -> playerRepository.getOnPositionAndTeamId2();
-            case "5" -> playerRepository.getOnPositionAndTeamIdAndHeight();
+            case "5" -> playerRepository.getOnPositionAndTeamIdAndHeight().stream().filter(i->Integer.parseInt((String)i.get("height")) >=170).toList();
             case "5-1" -> playerRepository.getOnPositionAndTeamIdAndHeight2();
             case "6" -> playerRepository.getOnPositionAndHeightAndTeamId();
             case "7" -> playerRepository.getPositionAndeRegion();
@@ -34,7 +34,7 @@ public class PlayerRouter {
             case "18" -> playerService.getOnCountAll();
             case "20" -> playerRepository.getOnPositionAndTeamId20();
             case "21" -> playerService.getOnPositionAndTeamId21();
-            case "22" -> playerRepository.getHeightAndTeamId()
+            case "22" -> playerRepository.getHeightAndTeamId();
 
 
             default -> throw new IllegalStateException("Unexpected value: " + q);

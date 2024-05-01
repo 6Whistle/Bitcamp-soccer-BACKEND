@@ -91,17 +91,18 @@ public interface PlayerJpqlRepository extends JpaRepository<Player , Long>  {
     List<Map<String, Object>> getPositionAndeRegion();
 
 
-//    @Query("SELECT p.*\n" +
+//    @Query("SELECT new map(p)\n" +
 //            "FROM player p\n" +
-//            "JOIN (SELECT p2.team_id, ROUND(AVG(p2.height), 2) avg\n" +
+//            "JOIN (SELECT p2.team_id, ROUND(AVG(CAST((p2.height), 2)))avg\n" +
 //            "      FROM player p2\n" +
 //            "      where p2.height != ''\n" +
 //            "      GROUP BY p2.team_id) tavg USING (team_id)\n" +
 //            "WHERE p.height != ''\n" +
 //            "  AND p.height < tavg.avg;")
     @Query("SELECT new  map (p.height) FROM player p\n" +
-            "WHERE p.height < (SELECT ROUND(AVG(tp.height), 2)\n" +
-            "                  FROM player tp\n" +
-            "                  WHERE p.teamId.teamId = tp.teamId.teamId)")
+            "WHERE p.height != '\' " )
+//            " (SELECT ROUND(AVG(CAST(tp.height AS double )), 2) AS 평균\n" +
+//            "                  FROM player tp\n" +
+//            "                  WHERE p.teamId.teamId = tp.teamId.teamId)")
     List<Map<String, Object>> getHeightAndTeamId();
 }
