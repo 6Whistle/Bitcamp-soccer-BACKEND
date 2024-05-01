@@ -6,6 +6,7 @@ import com.erichgamma.api.common.query.QueryService;
 import com.erichgamma.api.player.model.PlayerDto;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PlayerService extends CommandService<PlayerDto>, QueryService<PlayerDto> {
     List<?> getOnPosition();
@@ -20,11 +21,11 @@ public interface PlayerService extends CommandService<PlayerDto>, QueryService<P
 
     List<?> getOnPositionAndTeamId10();
 
-    List<?> getOnCountAll();
+    List<Map<String,Object>> getOnCountAll();
 
     List<?> getOnPositionAndTeamId20();
 
-    List<?> getOnPositionAndTeamId21();
+    List<Map<String,Object>> getOnPositionAndTeamId21();
 
     List<?> getOnPositionAndTeamId2();
 
