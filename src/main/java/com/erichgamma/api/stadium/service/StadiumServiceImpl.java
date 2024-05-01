@@ -71,28 +71,4 @@ public class StadiumServiceImpl implements StadiumService {
         throw new UnsupportedOperationException("Unimplemented method 'existsById'");
     }
 
-    @Override
-    public List<?> stadiumNameWithTeam() {
-        return stadiumRepository.stadiumNameWithTeam();
-    }
-
-    @Override
-    public List<?> stadiumAndTeamAndSchedule() {
-        return stadiumRepository.stadiumAndTeamAndSchedule();
-    }
-
-    @Override
-    public List<?> pohangSteelersGk() {
-        return stadiumRepository.pohangSteelersGk();
-    }
-
-    @Override
-    public List<?> homeTeamWin() {
-        return stadiumRepository.homeTeamWin();
-    }
-
-    @Override
-    public List<?> noHomeTeam() {
-        return stadiumRepository.noHomeTeam();
-    }
 }
