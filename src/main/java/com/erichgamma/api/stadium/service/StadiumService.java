@@ -7,4 +7,5 @@ import com.erichgamma.api.stadium.model.StadiumDto;
 import java.util.List;
 
 public interface StadiumService extends CommandService<StadiumDto>, QueryService<StadiumDto> {
-    }
+
+}
