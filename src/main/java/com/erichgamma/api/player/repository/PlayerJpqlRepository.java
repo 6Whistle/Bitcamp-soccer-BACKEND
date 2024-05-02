@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public interface PlayerJpqlRepository extends JpaRepository<Player , Long>  {
+public interface PlayerJpqlRepository   {
     @Query("SELECT DISTINCT new map(p.position AS position) FROM player p")
     List<Map<String, Object>> getOnPosition();
 

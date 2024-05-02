@@ -18,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PlayerServiceImpl implements PlayerService {
     private final PlayerRepository playerRepository;
-    private final PlayerJpqlRepository playerJpqlRepository;
 
     @Override
     public MessengerVo save(PlayerDto t) {
