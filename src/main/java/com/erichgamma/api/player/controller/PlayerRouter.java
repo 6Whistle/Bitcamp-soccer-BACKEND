@@ -26,7 +26,7 @@ public class PlayerRouter {
             case "4-1" -> playerRepository.getOnPositionAndTeamId2();
             case "5" -> playerRepository.getOnPositionAndTeamIdAndHeight().stream().filter(i->Integer.parseInt((String)i.get("height")) >=170).toList();
             case "5-1" -> playerRepository.getOnPositionAndTeamIdAndHeight2().stream().filter(i->Integer.parseInt((String)i.get("height")) >=170 ).toList();
-            case "6" -> playerRepository.getOnPositionAndHeightAndTeamId().stream().filter(i->Integer.parseInt((String)i.get("height")) >= 170 &&Integer.parseInt((String)i.get("height"))<=180).toList();
+            case "6" -> playerRepository.getOnPositionAndHeightAndTeamId().stream().filter(i->Integer.parseInt((String)i.get("height")) >= 170).filter(i->Integer.parseInt((String)i.get("height")) <=180 ).toList();
             case "7" -> playerRepository.getPositionAndeRegion();
             case "8" -> playerRepository.getOnPositionAndTeamId7();
             case "9" -> playerRepository.getOnHeightAndWeight();

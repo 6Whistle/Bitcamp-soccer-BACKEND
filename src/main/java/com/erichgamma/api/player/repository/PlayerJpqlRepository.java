@@ -79,7 +79,7 @@ public interface PlayerJpqlRepository   {
             "           AND t.regionName= '수원'")
     List<Map<String , Object>> getOnPositionAndTeamIdAndHeight2();
 
-    @Query("SELECT new map (p.playerName as playerName,p.position as position,p.teamId.teamId as teamId, p.height asheight ) FROM player p WHERE p.position = 'MF'\n" +
+    @Query("SELECT new map (p.playerName as playerName,p.position as position,p.teamId.teamId as teamId, p.height as height ) FROM player p WHERE p.position = 'MF'\n" +
             "                              AND p.height != '' \n " +
             "                              AND p.teamId.teamId IN\n" +
             "                                  (SELECT t.teamId from team t WHERE t.teamName IN ('삼성블루윙즈', '드래곤즈'))")
