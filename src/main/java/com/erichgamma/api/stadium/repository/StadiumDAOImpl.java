@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
-public class StadiumEntityManagerImpl implements StadiumEntityManager {
+public class StadiumDAOImpl implements StadiumDAO {
     private final EntityManager entityManager;
 
     @Override
