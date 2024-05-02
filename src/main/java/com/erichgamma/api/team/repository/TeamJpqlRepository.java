@@ -3,12 +3,9 @@ package com.erichgamma.api.team.repository;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.erichgamma.api.team.model.Team;
-
-public interface TeamJpqlRepository extends JpaRepository<Team, Long> {
+public interface TeamJpqlRepository {
         String dto = " new map(" + 
                     "t.id AS id, t.teamId AS teamId, t.regionName AS regionName, t.teamName AS teamName, " + 
                     "t.eTeamName AS eTeamName, t.origYyyy AS origYyyy, t.zipCode1 AS zipCode1, t.zipCode2 AS zipCode2, " + 
