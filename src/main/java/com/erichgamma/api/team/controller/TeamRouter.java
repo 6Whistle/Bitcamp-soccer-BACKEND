@@ -18,8 +18,8 @@ public class TeamRouter {
         return switch (q) {
             case "1" -> teamRepository.getTeamsOrderByTeamName();
             case "12" -> teamRepository.getTeamsByteamName().stream()
-                                        .filter(i -> ((String)(i.get("teamName"))).equals("K02") || ((String)(i.get("teamName"))).equals("K10"))
-                                        .filter(i -> (Integer)(i.get("height")) >= 180 && (Integer)(i.get("height")) <= 183)
+                                        .filter(i -> ((String)(i.get("teamId"))).equals("K02") || ((String)(i.get("teamId"))).equals("K10"))
+                                        .filter(i -> Integer.parseInt((String)(i.get("height"))) >= 180 && Integer.parseInt((String)(i.get("height"))) <= 183)
                                         .toList();
             case "13" -> teamRepository.getNotSelectedPostion();
             case "19" -> teamRepository.getHeightAvgByTeam().stream()
