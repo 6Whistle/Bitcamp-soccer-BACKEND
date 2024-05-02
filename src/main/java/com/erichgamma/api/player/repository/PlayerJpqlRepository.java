@@ -85,7 +85,7 @@ public interface PlayerJpqlRepository extends JpaRepository<Player , Long>  {
             "                                  (SELECT t.teamId from team t WHERE t.teamName IN ('삼성블루윙즈', '드래곤즈'))")
     List<Map<String , Object>> getOnPositionAndHeightAndTeamId();
 
-    @Query("SELECT new map (p.position , p.teamId.teamId , team .regionName )FROM player p WHERE p.position = 'GK'\n" +
+    @Query("SELECT new map (p.position , p.teamId.teamId  )FROM player p WHERE p.position = 'GK'\n" +
             "                       AND p.teamId.teamId =\n" +
             "                           (SELECT t.teamId FROM team t WHERE t.regionName = '수원')")
     List<Map<String, Object>> getPositionAndeRegion();
