@@ -11,20 +11,16 @@ import java.util.Map;
 
 @RequiredArgsConstructor
 @Component
-public class ScheduleRouter  {
-
+public class ScheduleRouter {
 
     private final ScheduleRepository scheduleRepository;
 
-    @SuppressWarnings("unchecked")
-    public  List<Map<String,Object>> execute(String q) {
+    public List<Map<String, Object>> execute(String q) {
 
-
-        return switch (q)
-        {
-//            case "1" -> scheduleRepository.getScheduleByDate();
-            case "2" -> null;
-            default ->  null;
+        return switch (q) {
+            case "16" -> scheduleRepository.getScoregepByScheDate();
+            case "23" -> scheduleRepository.getScheduleByDate();
+            default -> List.of();
 
         };
 
