@@ -12,18 +12,16 @@ import java.util.Map;
 public interface ScheduleJpqlRepository extends JpaRepository<Schedule, Long> {
 
 
-    @Query("SELECT distinct new map(s.stadiumName AS stadiumName)" +
+    @Query("SELECT distinct new map(s.stadiumName AS 경기장)" +
             "FROM schedule sch\n" +
-            "JOIN stadium s ON sch.stadiumId = s.stadiumId\n" +
-            "WHERE YEAR(sch.scheDate) = 2012 AND MONTH(sch.scheDate) = 5 ")
+            "JOIN stadium s ON sch.stadiumId.stadiumId = s.stadiumId\n" +
+            "WHERE sch.scheDate BETWEEN '20120501' AND '20120531' ")
     List<Map<String, Object>> getScheduleByDate();
 
-    @Query("select new map(s.stadiumName AS stadium,\n" +
-            "sch.scheDate,\n" +
-            "thome.teamName AS home,\n" +
-            "taway.teamName AS away)" +
+    @Query("SELECT DISTINCT new map(s.stadiumName AS 경기장, sch.scheDate as 경기날짜, thome.teamName AS 홈팀,\n" +
+            "taway.teamName AS 어웨이팀)" +
             "FROM schedule sch\n" +
-            "JOIN stadium s ON sch.stadiumId = s.stadiumId\n" +
+            "JOIN stadium s ON sch.stadiumId.stadiumId = s.stadiumId\n" +
             "JOIN team thome ON sch.hometeamId = thome.teamId\n" +
             "JOIN team taway ON sch.awayteamId = taway.teamId\n" +
             "WHERE (sch.homeScore - sch.awayScore) >= 3")
@@ -39,7 +37,7 @@ public interface ScheduleJpqlRepository extends JpaRepository<Schedule, Long> {
 //-- 홈팀 이름과 원정팀 이름을
 ////-- 구하시오
 
-
+//20120727
 ////-- 문제 23
 ////-- 2012년 5월 한달간 경기가 있는 경기장  조회
 //SELECT DISTINCT (SELECT s.stadium_name
