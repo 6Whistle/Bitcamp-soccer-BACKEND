@@ -37,6 +37,7 @@ public interface TeamJpqlRepository {
     @Query(value = 
     "SELECT new map(t.teamId AS 팀ID, t.teamName AS 팀명, ROUND(AVG(CAST(p.height AS double)), 2) AS 평균) FROM team t " + 
     "JOIN player p ON t.teamId = p.teamId.teamId " +
+    "WHERE p.height != '' " +
     "GROUP BY t.teamId, t.teamName")
     List<Map<String, Object>> getHeightAvgByTeam();
     

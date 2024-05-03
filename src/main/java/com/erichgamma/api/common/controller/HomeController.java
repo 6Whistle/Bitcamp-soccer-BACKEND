@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
@@ -30,6 +32,7 @@ public class HomeController {
         @RequestParam(value = "c", required = true) String category,
         @RequestParam(value = "q", required = true) String q
     ){
+        log.info("search {} {}", category, q);
         return ResponseEntity.ok(homeRouter.execute(category, q));
     }
 }
