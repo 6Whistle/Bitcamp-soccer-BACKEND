@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
 
 @RequiredArgsConstructor
 @Component
@@ -15,7 +14,7 @@ public class ScheduleRouter {
 
     private final ScheduleRepository scheduleRepository;
 
-    public List<Map<String, Object>> execute(String q) {
+    public List<?> execute(String q) {
 
         return switch (q) {
             case "16" -> scheduleRepository.getScoregepByScheDate();
