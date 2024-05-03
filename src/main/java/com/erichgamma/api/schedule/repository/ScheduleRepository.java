@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface ScheduleRepository extends ScheduleJpqlRepository {
+public interface ScheduleRepository extends ScheduleJpqlRepository,ScheduleDAO {
 
 
 

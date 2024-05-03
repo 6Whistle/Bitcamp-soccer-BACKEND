@@ -19,6 +19,7 @@ public class ScheduleRouter {
         return switch (q) {
             case "16" -> scheduleRepository.getScoregepByScheDate();
             case "23" -> scheduleRepository.getScheduleByDate();
+            case "findAll" -> scheduleRepository.getAllSchedule();
             default -> List.of();
 
         };

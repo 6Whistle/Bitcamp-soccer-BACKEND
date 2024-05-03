@@ -1,10 +1,8 @@
 package com.erichgamma.api.stadium.repository;
 
-import com.erichgamma.api.stadium.model.Stadium;
-import jakarta.persistence.EntityManager;
+import java.util.List;
 
-public interface StadiumDAO extends EntityManager {
+public interface StadiumDAO {
 
-    void insert(Stadium stadium);
-    void update(Stadium stadium);
+    List<?> getAllStadium();
 }
