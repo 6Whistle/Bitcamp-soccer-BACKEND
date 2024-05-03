@@ -20,15 +20,23 @@ public interface PlayerJpqlRepository   {
     @Query("SELECT new map (p.teamId.teamId AS teamId , p.position AS position ) FROM player p where p.position = 'GK' AND p.teamId.teamId = 'k02'")
     List<Map<String ,Object>> getOnPositionAndTeamId();
 
-    @Query("SELECT new map (p.teamId.teamId as PteamId , t.teamId as teamId , t.regionName AS regionName, p.position AS position) FROM player p JOIN team t on t.teamId = p.teamId.teamId\n" +
-            "                          where p.position = 'GK' AND t.regionName = '수원'")
+//    @Query("SELECT new map (p.teamId.teamId as PteamId , t.teamId as teamId , t.regionName AS regionName, p.position AS position) FROM player p JOIN team t on t.teamId = p.teamId.teamId\n" +
+//            "                          where p.position = 'GK' AND t.regionName = '수원'")
+    @Query("SELECT new map(p.playerName AS 이름,\n" +
+            "       IFNULL(NULLIF(p.height, ''), '0') AS 키,\n" +
+            "       IFNULL(NULLIF(p.weight, ''), '0') AS 몸무게) FROM player p WHERE p.teamId.teamId =\n" +
+            "                                                              (SELECT t.teamId FROM team t WHERE t.regionName = '서울')")
     List<Map<String ,Object>> getOnPositionAndTeamId7();
 
     @Query("SELECT new map (p.playerName AS playerName,\n" +
             "       IFNULL(NULLIF(p.height, ''), '0') AS 키,\n" +
-            "       IFNULL(NULLIF(p.weight, ''), '0') AS 몸무게) FROM player p WHERE p.teamId.teamId =\n" +
-            "                                                              (SELECT t.teamId FROM team t WHERE t.regionName = '서울')")
-    List<Map<String ,Object>> getOnHeightAndWeight();
+            "       IFNULL(NULLIF(p.weight, ''), '0') AS 몸무게 " +
+            " ,CASE WHEN (p.height = '') OR p.weight = '' THEN 'NONE'\n" +
+            "           ELSE CAST(round(CAST(p.weight AS DOUBLE) / CAST(POW(CAST(p.height AS DOUBLE) / 100.0, 2) AS DOUBLE), 2) AS string) \n" +
+            "           END AS BMI) " +
+            "FROM player p JOIN team t ON t.teamId = p.teamId.teamId \n" +
+            "WHERE t.regionName = '서울'")
+    List<Map<String, Object>> getOnHeightAndWeight();
 
     @Query("SELECT new map (p.position AS position , p.teamId.teamId AS teamId, p.playerName AS playerName )FROM player p\n" +
             "WHERE p.position = 'GK'\n" +
