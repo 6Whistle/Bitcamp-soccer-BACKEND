@@ -22,7 +22,7 @@ public class StadiumRouter {
             case "15" -> stadiumRepository.pohangSteelersGk();
             case "16" -> stadiumRepository.homeTeamWin();
             case "17" -> stadiumRepository.noHomeTeam();
-            case "find" -> stadiumRepository.getAllStadium();
+            case "findAll" -> stadiumRepository.getAllStadium();
             default -> List.of();
         };
     }
