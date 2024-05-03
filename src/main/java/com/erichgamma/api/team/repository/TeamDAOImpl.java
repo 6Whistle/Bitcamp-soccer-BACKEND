@@ -1,32 +1,58 @@
 package com.erichgamma.api.team.repository;
 
-import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
+import java.util.List;
 
-import com.erichgamma.api.team.model.Team;
+import com.erichgamma.api.team.model.QTeam;
+import com.erichgamma.api.team.model.TeamDto;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 
-@PersistenceContext
 @RequiredArgsConstructor
 public class TeamDAOImpl implements TeamDAO{
-    private final EntityManager teamEntityManager;
+
+    private final JPAQueryFactory queryFactory;
 
     @Override
-    public Team find(Long id) {
-        return teamEntityManager.find(Team.class, id);
+    public TeamDto find(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'find'");
     }
 
     @Override
-    public void insert(Team team) {
-        teamEntityManager.persist(team);
+    public List<TeamDto> getAllTeams() {
+        return queryFactory.selectFrom(QTeam.team)
+            .fetch()
+            .stream()
+            .map(i -> TeamDto.builder()
+            .id(i.getId())
+            .teamId(i.getTeamId())
+            .teamName(i.getTeamName())
+            .eTeamName(i.getETeamName())
+            .origYyyy(i.getOrigYyyy())
+            .zipCode1(i.getZipCode1())
+            .zipCode2(i.getZipCode2())
+            .address(i.getAddress())
+            .ddd(i.getDdd())
+            .tel(i.getTel())
+            .fax(i.getFax())
+            .homepage(i.getHomepage())
+            .owner(i.getOwner())
+            .stadiumId(i.getStadiumId().getStadiumId())
+            .build())
+        .toList();
     }
 
     @Override
-    public void update(Team team) {
-        teamEntityManager.persist(team);
+    public void insert(TeamDto team) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'insert'");
     }
 
-    
+    @Override
+    public void update(TeamDto team) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    }
+
 }

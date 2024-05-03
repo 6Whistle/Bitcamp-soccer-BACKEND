@@ -1,10 +1,14 @@
 package com.erichgamma.api.team.repository;
 
-import com.erichgamma.api.team.model.Team;
+import java.util.List;
+
+import com.erichgamma.api.team.model.TeamDto;
 
 public interface TeamDAO{
-    Team find(Long id);
+    TeamDto find(Long id);
 
-    void insert(Team team);
-    void update(Team team);
+    List<TeamDto> getAllTeams();
+
+    void insert(TeamDto team);
+    void update(TeamDto team);
 }

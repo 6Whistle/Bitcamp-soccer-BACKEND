@@ -20,7 +20,7 @@ public class HomeRouter {
     private final ScheduleRouter scheduleRouter;
     private final StadiumRouter stadiumRouter;
 
-    public List<Map<String, Object>> execute(String category, String q){
+    public List<?> execute(String category, String q){
         return switch (category) {
             case "team" -> teamRouter.execute(q);
             case "player" -> playerRouter.execute(q);
