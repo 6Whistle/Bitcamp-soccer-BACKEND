@@ -12,17 +12,18 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class PlayerDto {
     private Long id;
-    private String playerId;
-    private String name;
-    private String playerName;
+    private String position;
     private String ePlayerName;
+    private String backNo;
+    private String playerId;
+    private String birthDate;
+    private String height;
+    private String joinYyyy;
+    private String name;
+    private String nation;
+    private String solar;
+    private String weight;
     private String nickname;
-    private String joinYyyy ;
-    private String position ;
-    private String backNo ;
-    private String nation ;
-    private String birthDate ;
-    private String solar ;
-    private String height ;
-    private String weight ;
+    private String playerName;
+    private String teamId;
 }

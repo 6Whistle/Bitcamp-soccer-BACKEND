@@ -1,11 +1,13 @@
 package com.erichgamma.api.player.repository;
 
-import com.erichgamma.api.player.model.Player;
+import java.util.List;
 
 public interface PlayerDAO {
 
+    List<?> getAllPlayer();
 
 
-//    void insert (Player player);
-//    void update (Player player);
+
+
+
 }
