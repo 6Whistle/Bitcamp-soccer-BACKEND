@@ -13,10 +13,13 @@ public class ApiApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiApplication.class, args);
+
 	}
 //	@Bean
 //	JPAQueryFactory jpaQueryFactory(EntityManager entityManager){
 //		return new JPAQueryFactory(entityManager);
 //	}
+
+
 
 }

@@ -1,31 +1,42 @@
 package com.erichgamma.api.schedule.repository;
 
-import com.erichgamma.api.schedule.model.Schedule;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import com.erichgamma.api.schedule.model.QSchedule;
+import com.erichgamma.api.schedule.model.ScheduleDto;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 
+import java.util.List;
 
 @RequiredArgsConstructor
-@PersistenceContext
-public class ScheduleDAOImpl implements ScheduleDAO  {
+public class ScheduleDAOImpl implements ScheduleDAO {
 
-
-    private final EntityManager entityManager;
+    private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public Schedule sch(Schedule schedule, Long id) {
-        return entityManager.find(Schedule.class, 1L);
-    }
+    public List<ScheduleDto> getAllSchedule() {
 
-    @Override
-    public void insert(Schedule schedule) {
-        entityManager.persist(schedule);
-    }
-
-    @Override
-    public void update(Schedule schedule) {
-        entityManager.merge(schedule);
+        return jpaQueryFactory.select(
+                        QSchedule.schedule.id,
+                        QSchedule.schedule.scheDate,
+                        QSchedule.schedule.gubun,
+                        QSchedule.schedule.homeScore,
+                        QSchedule.schedule.awayScore,
+                        QSchedule.schedule.hometeamId,
+                        QSchedule.schedule.awayteamId,
+                        QSchedule.schedule.stadiumId)
+                .from(QSchedule.schedule)
+                .fetch()
+                .stream()
+                .map(tuple -> ScheduleDto.builder()
+                        .id(tuple.get(QSchedule.schedule.id))
+                        .scheDate(tuple.get(QSchedule.schedule.scheDate))
+                        .gubun(tuple.get(QSchedule.schedule.gubun))
+                        .homeScore(tuple.get(QSchedule.schedule.homeScore))
+                        .awayScore(tuple.get(QSchedule.schedule.awayScore))
+                        .hometeamId(tuple.get(QSchedule.schedule.hometeamId))
+                        .awayteamId(tuple.get(QSchedule.schedule.awayteamId))
+                        .stadiumId(tuple.get(QSchedule.schedule.stadiumId.stadiumId))
+                        .build())
+                .toList();
     }
 }
