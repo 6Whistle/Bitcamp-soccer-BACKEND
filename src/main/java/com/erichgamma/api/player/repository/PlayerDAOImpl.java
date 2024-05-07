@@ -117,14 +117,15 @@ public class PlayerDAOImpl implements PlayerDAO {
 
 
 
+        return null;
 
-        return jpaQueryFactory.select(
-                player.position,
-                player.teamId.teamId,
-                player.playerName
-        ).from(player).where(player.position.eq("GK").and(player.teamId.teamId.in("K02","K10")))
-                .orderBy((OrderSpecifier<?>) jpaQueryFactory.select(team.teamName).from(team).where(team.teamId.eq(player.teamId.teamId)).fetch(),player.playerName.asc())
-                .fetch().stream().map(i->Map.of("playerName",i.get(player.playerName),"teamId",i.get(player.teamId.teamId),"position",i.get(player.position))).toList();
+//        return jpaQueryFactory.select(
+//                player.position,
+//                player.teamId.teamId,
+//                player.playerName
+//        ).from(player).where(player.position.eq("GK").and(player.teamId.teamId.in("K02","K10")))
+//                .orderBy((OrderSpecifier<?>) jpaQueryFactory.select(team.teamName).from(team).where(team.teamId.eq(player.teamId.teamId)).fetch(),player.playerName.asc())
+//                .fetch().stream().map(i->Map.of("playerName",i.get(player.playerName),"teamId",i.get(player.teamId.teamId),"position",i.get(player.position))).toList();
     }
 
 

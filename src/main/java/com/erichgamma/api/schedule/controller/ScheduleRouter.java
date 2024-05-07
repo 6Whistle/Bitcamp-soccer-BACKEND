@@ -17,9 +17,11 @@ public class ScheduleRouter {
     public List<?> execute(String q) {
 
         return switch (q) {
-            case "16" -> scheduleRepository.getScoregepByScheDate();
-            case "23" -> scheduleRepository.getScheduleByDate();
+//            case "16" -> scheduleRepository.getScoregepByScheDate();
+//
             case "findAll" -> scheduleRepository.getAllSchedule();
+            case "16" -> scheduleRepository.getScheduleByDateDsl();
+            case "22" -> scheduleRepository.getScoregepByScheDateDsl();
             default -> List.of();
 
         };
