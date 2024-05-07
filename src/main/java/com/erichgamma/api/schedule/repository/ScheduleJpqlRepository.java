@@ -2,30 +2,29 @@ package com.erichgamma.api.schedule.repository;
 
 import com.erichgamma.api.schedule.model.Schedule;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
-
-import java.util.List;
-import java.util.Map;
 
 
 public interface ScheduleJpqlRepository extends JpaRepository<Schedule, Long> {
 
 
-    @Query("SELECT distinct new map(s.stadiumName AS 경기장)" +
-            "FROM schedule sch\n" +
-            "JOIN stadium s ON sch.stadiumId.stadiumId = s.stadiumId\n" +
-            "WHERE sch.scheDate BETWEEN '20120501' AND '20120531' ")
-    List<Map<String, Object>> getScheduleByDate();
+//    @Query("SELECT distinct new map(s.stadiumName AS 경기장)" +
+//            "FROM schedule sch\n" +
+//            "JOIN stadium s ON sch.stadiumId.stadiumId = s.stadiumId\n" +
+//            "WHERE sch.scheDate BETWEEN '20120501' AND '20120531' ")
+//    List<Map<String, Object>> getScheduleByDate();
+//
+//    @Query("SELECT DISTINCT new map(s.stadiumName AS 경기장, sch.scheDate as 경기날짜, thome.teamName AS 홈팀,\n" +
+//            "taway.teamName AS 어웨이팀)" +
+//            "FROM schedule sch\n" +
+//            "JOIN stadium s ON sch.stadiumId.stadiumId = s.stadiumId\n" +
+//            "JOIN team thome ON sch.hometeamId = thome.teamId\n" +
+//            "JOIN team taway ON scdh.awayteamId = taway.teamId\n" +
+//            "WHERE (sch.homeScore - sch.awayScore) >= 3")
+//    List<Map<String, Object>> getScoregepByScheDate();
+//
 
-    @Query("SELECT DISTINCT new map(s.stadiumName AS 경기장, sch.scheDate as 경기날짜, thome.teamName AS 홈팀,\n" +
-            "taway.teamName AS 어웨이팀)" +
-            "FROM schedule sch\n" +
-            "JOIN stadium s ON sch.stadiumId.stadiumId = s.stadiumId\n" +
-            "JOIN team thome ON sch.hometeamId = thome.teamId\n" +
-            "JOIN team taway ON sch.awayteamId = taway.teamId\n" +
-            "WHERE (sch.homeScore - sch.awayScore) >= 3")
-    List<Map<String, Object>> getScoregepByScheDate();
+
 
 
 }
