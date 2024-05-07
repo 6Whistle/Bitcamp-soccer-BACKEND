@@ -2,7 +2,9 @@ package com.erichgamma.api.team.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import com.erichgamma.api.team.repository.TeamRepository;
@@ -14,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 public class TeamRouter {
     private final TeamRepository teamRepository;
 
-    public List<?> execute(String q){
+    public List<?> execute(String q, Pageable pageable){
         return switch (q) {
             case "1" -> teamRepository.getTeamsOrderByTeamName();
             case "12" -> ((List<Map<String, Object>>)teamRepository.getTeamsByteamName()).stream()
@@ -25,7 +27,8 @@ public class TeamRouter {
             case "19" -> ((List<Map<String, Object>>)teamRepository.getHeightAvgByTeam()).stream()
                                         .filter(i -> (Double)(i.get("평균")) < 176.59)
                                         .toList();
-            case "findAll" -> teamRepository.getAllTeams();
+            case "all" -> teamRepository.getAllTeamsDSL(pageable);
+            case "no-position" -> teamRepository.getEmptyPositionDSL();
             default -> List.of();
         };
     }

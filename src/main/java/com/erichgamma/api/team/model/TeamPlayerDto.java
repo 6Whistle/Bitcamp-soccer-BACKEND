@@ -2,8 +2,6 @@ package com.erichgamma.api.team.model;
 
 import org.springframework.stereotype.Component;
 
-import com.erichgamma.api.stadium.model.Stadium;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
