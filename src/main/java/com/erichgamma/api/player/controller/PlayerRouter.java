@@ -18,19 +18,25 @@ public class PlayerRouter {
     private  final PlayerRepository playerRepository;
     private  final PlayerService playerService;
 
+
     public  List<?> execute(String q ){
         return  switch (q)  {
             case "2" -> playerRepository.getOnPosition();
+            case "2-dsl" -> playerRepository.getOnPositionDSL();
             case "3" -> playerRepository.getOnPositionNotNull();
+            case "3-dsl" -> playerRepository.getOnPositionNotNullDSL();
             case "4" -> playerRepository.getOnPositionAndTeamId();
+            case "4-dsl" -> playerRepository.getOnPositionAndTeamIdDSL();
             case "4-1" -> playerRepository.getOnPositionAndTeamId2();
             case "5" -> ((List<Map<String, Object>>)playerRepository.getOnPositionAndTeamIdAndHeight()).stream().filter(i->Integer.parseInt((String)i.get("height")) >=170).toList();
             case "5-1" -> ((List<Map<String, Object>>)playerRepository.getOnPositionAndTeamIdAndHeight2()).stream().filter(i->Integer.parseInt((String)i.get("height")) >=170 ).toList();
             case "6" -> ((List<Map<String, Object>>)playerRepository.getOnPositionAndHeightAndTeamId()).stream().filter(i->Integer.parseInt((String)i.get("height")) >= 170).filter(i->Integer.parseInt((String)i.get("height")) <=180 ).toList();
             case "7" -> playerRepository.getPositionAndeRegion();
             case "8" -> playerRepository.getOnPositionAndTeamId7();
+            case "8-dsl" -> playerRepository.getOnPositionAndTeamId7DSL();
             case "9" -> playerRepository.getOnHeightAndWeight();
             case "10" -> playerRepository.getOnPositionAndTeamId10();
+            case "10-dsl" -> playerRepository.getOnPositionAndTeamId10DSL();
             case "18" -> playerService.getOnCountAll();
             case "20" -> playerRepository.getOnPositionAndTeamId20();
             case "21" -> playerService.getOnPositionAndTeamId21();
