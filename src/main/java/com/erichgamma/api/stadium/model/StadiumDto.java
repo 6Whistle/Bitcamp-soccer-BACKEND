@@ -1,5 +1,6 @@
 package com.erichgamma.api.stadium.model;
 
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,7 +8,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
@@ -20,4 +20,16 @@ public class StadiumDto {
     private String address;
     private String ddd;
     private String tel;
+
+    @QueryProjection
+    public StadiumDto(Long id, String stadiumId, String stadiumName, String hometeamId, Integer seatCount, String address, String ddd, String tel) {
+        this.id = id;
+        this.stadiumId = stadiumId;
+        this.stadiumName = stadiumName;
+        this.hometeamId = hometeamId;
+        this.seatCount = seatCount;
+        this.address = address;
+        this.ddd = ddd;
+        this.tel = tel;
+    }
 }
