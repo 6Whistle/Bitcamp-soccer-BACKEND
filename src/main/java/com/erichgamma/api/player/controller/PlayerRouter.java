@@ -3,6 +3,7 @@ package com.erichgamma.api.player.controller;
 import com.erichgamma.api.common.model.Box;
 import com.erichgamma.api.common.model.PageDTO;
 import com.erichgamma.api.common.service.PageService;
+import com.erichgamma.api.common.service.impl.PageServiceImpl;
 import com.erichgamma.api.player.repository.PlayerRepository;
 import com.erichgamma.api.player.service.PlayerService;
 import lombok.RequiredArgsConstructor;
@@ -32,10 +33,10 @@ public class PlayerRouter {
 
 
 
-        Box.builder()
-                .pageDTO(pageService.getPageDTO((long) pageable.getPageNumber(), playerRepository.countAllPlayers(), (long) pageable.getPageSize()))
-                .list(playerRepository.getAllPlayer())
-                .build();
+//        Box.builder()
+//                .pageDTO(pageService.getPageDTO((long) pageable.getPageNumber(), playerRepository.countAllPlayers(), (long) pageable.getPageSize()))
+//                .list(playerRepository.getAllPlayer())
+//                .build();
 
 
 
@@ -55,17 +56,23 @@ public class PlayerRouter {
             case "5-dsl" -> ((List<Map<String, Object>>)playerRepository.getOnPositionAndTeamIdAndHeightDSL()).stream().filter(i->Integer.parseInt((String)i.get("height")) >=170).toList();
             case "5-1" -> ((List<Map<String, Object>>)playerRepository.getOnPositionAndTeamIdAndHeight2()).stream().filter(i->Integer.parseInt((String)i.get("height")) >=170 ).toList();
             case "6" -> ((List<Map<String, Object>>)playerRepository.getOnPositionAndHeightAndTeamId()).stream().filter(i->Integer.parseInt((String)i.get("height")) >= 170).filter(i->Integer.parseInt((String)i.get("height")) <=180 ).toList();
+            case "6-dsl" -> ((List<Map<String, Object>>)playerRepository.getOnPositionAndHeightAndTeamIdDSL()).stream().filter(i->Integer.parseInt((String)i.get("height")) >= 170).filter(i->Integer.parseInt((String)i.get("height")) <=180 ).toList();
             case "7" -> playerRepository.getPositionAndeRegion();
+            case "7-dsl" -> playerRepository.getPositionAndeRegionDSL();
             case "8" -> playerRepository.getOnPositionAndTeamId7();
             case "8-dsl" -> playerRepository.getOnPositionAndTeamId7DSL();
             case "9" -> playerRepository.getOnHeightAndWeight();
+            case "9-dsl" -> playerRepository.getOnHeightAndWeightDSL();
             case "10" -> playerRepository.getOnPositionAndTeamId10();
             case "10-dsl" -> playerRepository.getOnPositionAndTeamId10DSL();
             case "18" -> playerService.getOnCountAll();
             case "20" -> playerRepository.getOnPositionAndTeamId20();
             case "20-dsl" -> playerRepository.getOnPositionAndTeamId20DSL();
             case "21" -> playerService.getOnPositionAndTeamId21();
+            case "21-dsl" -> playerRepository.getOnPositionAndTeamId21DSL();
             case "22" -> playerRepository.getHeightAndTeamId();
+
+            case "22-dsl" -> playerRepository.getHeightAndTeamIdDSL();
             case "findAll" -> playerRepository.getAllPlayer();
 
             default -> throw new IllegalStateException("Unexpected value: " + q);

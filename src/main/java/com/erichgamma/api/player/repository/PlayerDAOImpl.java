@@ -8,8 +8,7 @@ import com.erichgamma.api.player.model.QPlayerDto;
 import com.erichgamma.api.team.model.QTeam;
 import com.querydsl.core.types.ExpressionUtils;
 
-import com.querydsl.core.types.OrderSpecifier;
-import com.querydsl.core.types.dsl.StringExpression;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -105,14 +104,26 @@ public class PlayerDAOImpl implements PlayerDAO {
     @Override
     public List<?> getOnHeightAndWeightDSL() {
 
-        return jpaQueryFactory.select(
-                player.playerName,
-                player.weight.coalesce("0").as("키"),
-                player.height.coalesce("0").as("몸무게")
-
-        ).from().fetch();
-
+//        return jpaQueryFactory
+//                .select(
+//                        Expressions.asMap(
+//                                player.playerName.as("playerName"),
+//                                Expressions.stringTemplate("IFNULL(NULLIF({0}, ''), '0')", player.height).as("키"),
+//                                Expressions.stringTemplate("IFNULL(NULLIF({0}, ''), '0')", player.weight).as("몸무게"),
+//                                Expressions.stringTemplate(
+//                                        "CASE WHEN ({0} = '') OR ({1} = '') THEN 'NONE' ELSE CAST(round(CAST({1} AS DOUBLE) / CAST(POW(CAST({0} AS DOUBLE) / 100.0, 2) AS DOUBLE), 2) AS string) END",
+//                                        player.height, player.weight
+//                                ).as("BMI")
+//                        )
+//                )
+//                .from(player)
+//                .join(player.teamId, team)
+//                .where(team.regionName.eq("서울"))
+//                .fetch();
+        return null;
     }
+
+
 
     @Override
     public List<Map<String, String>> getOnPositionAndTeamId10DSL() {
@@ -158,7 +169,7 @@ public class PlayerDAOImpl implements PlayerDAO {
     }
 
     @Override
-    public List<Map<String , String>> getOnPositionAndTeamId21(Pageable pageable) {
+    public List<Map<String , String>> getOnPositionAndTeamId21DSL() {
         return jpaQueryFactory.select(team.teamName, player.playerName, player.backNo)
                 .from(player)
                 .leftJoin(player.teamId, team)
@@ -192,6 +203,63 @@ public class PlayerDAOImpl implements PlayerDAO {
                 .stream().map(i->Map.of(
                         "teamId",i.get(player.teamId.teamId),"height",i.get(player.height)
                         ,"playerName",i.get(player.playerName)
+                )).toList();
+    }
+
+    @Override
+    public List<Map<String , String>> getOnPositionAndHeightAndTeamIdDSL() {
+        return jpaQueryFactory.select(
+                player.playerName,player.position,player.teamId.teamId
+                ,player.height
+        ).from(player)
+                .where(player.position.eq("MF")
+                        .and(player.height.isNotEmpty())
+                        .and(player.teamId.teamId
+                                .in(jpaQueryFactory.select(
+                                        team.teamId
+                                        )
+                                        .from(team)
+                                        .where(team.teamId
+                                                .in("삼성블루윙즈","드래곤즈"))))).fetch()
+                .stream()
+                .map(i->Map.of("playerName",i.get(player.playerName),"position",i.get(player.position)
+                        ,"teamId",i.get(player.teamId.teamId),"height",i.get(player.height)))
+                .toList();
+    }
+
+    @Override
+    public List<Map<String , String>> getPositionAndeRegionDSL() {
+        return jpaQueryFactory.select(
+                player.position,player.teamId.teamId
+        ).from(player)
+                .where(player.position.eq("GK")
+                        .and(player.teamId.teamId
+                                .eq(jpaQueryFactory.select(team.teamId)
+                                        .from(team)
+                                        .where(team.regionName
+                                                .eq("수원")))))
+                .fetch().stream()
+                .map(i->Map.of("position",i.get(player.position)
+                ,"teamId",i.get(player.teamId.teamId))).toList();
+    }
+
+    @Override
+    public List<Map<String , String>> getHeightAndTeamIdDSL() {
+        QPlayer Player = new QPlayer("subPlayer");
+        return jpaQueryFactory.select(
+                player.height,player.teamId.teamId
+                ,player.ePlayerName,player.playerId
+        ).from(player)
+                .where(player.height.castToNum(double.class).lt(
+                                jpaQueryFactory
+                                        .select(Player.height.castToNum(double.class).avg())
+                                        .from(Player)
+                                        .where(Player.teamId.teamId.eq(player.teamId.teamId))
+                        )
+                )
+                .fetch().stream().map(i->Map.of(
+                        "height",i.get(player.height),"teamId",i.get(player.teamId.teamId)
+                        ,"ePlayerName",i.get(player.ePlayerName),"playerId",i.get(player.playerId)
                 )).toList();
     }
 

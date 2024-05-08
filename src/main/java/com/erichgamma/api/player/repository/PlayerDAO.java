@@ -25,11 +25,15 @@ public interface PlayerDAO {
 
     List<?> getOnPositionAndTeamId20DSL();
 
-    List<?> getOnPositionAndTeamId21(Pageable pageable);
+    List<?> getOnPositionAndTeamId21DSL();
 
     List<?>getOnPositionAndTeamId2DSL();
 
     List<?>getOnPositionAndTeamIdAndHeightDSL();
+
+    List<?>getOnPositionAndHeightAndTeamIdDSL();
+    List<?>getPositionAndeRegionDSL();
+    List<?>getHeightAndTeamIdDSL();
 
 
     Long countAllPlayers();

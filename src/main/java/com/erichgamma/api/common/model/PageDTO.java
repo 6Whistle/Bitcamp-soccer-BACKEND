@@ -34,6 +34,18 @@ public class PageDTO {
         this.totalCount = totalCount;
         this.pageNumber = pageNumber;
 
+        pageCount =  ( (totalCount%pageSize) == 0 ? totalCount/pageSize : (totalCount/pageSize)+1);
+        blockCount =  ( (totalCount%(pageSize*BLOCK_SIZE)) == 0 ? totalCount/(pageSize*BLOCK_SIZE) : (totalCount/(pageSize*BLOCK_SIZE))+1);
+        blockNum = pageNumber % BLOCK_SIZE == 0 ? pageNumber/ BLOCK_SIZE :  pageNumber/ BLOCK_SIZE +1;
+        startRow =  pageSize*(pageNumber-1) ;
+        endRow = pageNumber == pageCount ?  (totalCount - 1) :  startRow +pageSize-1;
+        startPage = BLOCK_SIZE*(blockNum-1)+1;
+        endPage = blockNum == blockCount ? pageCount -1 : startPage+BLOCK_SIZE-1;
+        nextBlock = blockNum+1;
+        prevBlock = blockNum -1;
+        existPrev = prevBlock != 0;
+        existNext = nextBlock != blockCount;
+
 
     }
 }
