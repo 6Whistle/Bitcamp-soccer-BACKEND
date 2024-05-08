@@ -3,7 +3,6 @@ package com.erichgamma.api.stadium.repository;
 import com.erichgamma.api.stadium.model.QStadium;
 import com.erichgamma.api.stadium.model.QStadiumDto;
 import com.erichgamma.api.stadium.model.StadiumDto;
-import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
@@ -66,5 +65,10 @@ public class StadiumDAOImpl implements StadiumDAO {
     @Override
     public List<?> noHomeTeamDSL() {
         return List.of();
+    }
+
+    @Override
+    public Long countAllStadiums() {
+        return queryFactory.select(stadium.count()).from(stadium).fetchFirst();
     }
 }

@@ -3,6 +3,7 @@ package com.erichgamma.api.stadium.controller;
 import com.erichgamma.api.stadium.repository.StadiumRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
 import java.util.List;
 
 
@@ -19,9 +20,14 @@ public class StadiumRouter {
             case "15" -> stadiumRepository.pohangSteelersGk();
             case "16" -> stadiumRepository.homeTeamWin();
             case "17" -> stadiumRepository.noHomeTeam();
-            case "findAllDSL" -> stadiumRepository.getAllStadiumsDSL();
-            case "test" -> stadiumRepository.stadiumNameWithTeamDSL();
+            case "test1" -> stadiumRepository.getAllStadiumsDSL();
             default -> List.of();
         };
     }
+
+    public Long countAllStadiums() {
+        return stadiumRepository.countAllStadiums() ;
+    }
+
 }
+

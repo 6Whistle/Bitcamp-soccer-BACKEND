@@ -1,7 +1,6 @@
 package com.erichgamma.api.stadium.repository;
 
 import java.util.List;
-import java.util.Map;
 
 public interface StadiumDAO {
 
@@ -13,4 +12,6 @@ public interface StadiumDAO {
     List<?> pohangSteelersGkDSL();
     List<?> homeTeamWinDSL();
     List<?> noHomeTeamDSL();
+
+    Long countAllStadiums();
 }
