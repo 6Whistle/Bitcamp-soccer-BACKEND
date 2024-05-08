@@ -1,6 +1,8 @@
-package com.erichgamma.api.common.service;
+package com.erichgamma.api.common.service.impl;
 
 import org.springframework.stereotype.Service;
+
+import com.erichgamma.api.common.service.UtilService;
 
 @Service
 public class UtilServiceImpl implements UtilService {

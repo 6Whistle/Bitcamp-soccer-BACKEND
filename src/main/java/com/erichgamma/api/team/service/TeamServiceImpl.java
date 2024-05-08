@@ -60,8 +60,7 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public Long count() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'count'");
+        return teamRepository.getCountDSL();
     }
 
     @Override
