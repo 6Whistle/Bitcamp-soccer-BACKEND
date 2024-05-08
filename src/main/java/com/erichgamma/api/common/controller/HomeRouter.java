@@ -25,7 +25,7 @@ public class HomeRouter {
     public List<?> execute(String category, String q, Pageable pageable){
         return switch (category) {
             case "team" -> teamRouter.execute(q, pageable);
-            case "player" -> playerRouter.execute(q);
+            case "player" -> playerRouter.execute(q,pageable);
             case "schedule" -> scheduleRouter.execute(q);
             case "stadium" -> stadiumRouter.execute(q);
             default -> List.of();

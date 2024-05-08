@@ -5,13 +5,14 @@ import com.erichgamma.api.player.model.PlayerDto;
 import com.erichgamma.api.player.model.QPlayer;
 import com.erichgamma.api.player.model.QPlayerDto;
 
+import com.erichgamma.api.team.model.QTeam;
 import com.querydsl.core.types.ExpressionUtils;
 
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.StringExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
-
+import org.springframework.data.domain.Pageable;
 
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class PlayerDAOImpl implements PlayerDAO {
 
     private final JPAQueryFactory jpaQueryFactory;
     private  final  QPlayer player = QPlayer.player;
+    private  final QTeam team = QTeam.team;
     @Override
     public List<PlayerDto> getAllPlayer() {
         return jpaQueryFactory.select(
@@ -117,16 +119,89 @@ public class PlayerDAOImpl implements PlayerDAO {
 
 
 
-        return null;
 
-//        return jpaQueryFactory.select(
-//                player.position,
-//                player.teamId.teamId,
-//                player.playerName
-//        ).from(player).where(player.position.eq("GK").and(player.teamId.teamId.in("K02","K10")))
-//                .orderBy((OrderSpecifier<?>) jpaQueryFactory.select(team.teamName).from(team).where(team.teamId.eq(player.teamId.teamId)).fetch(),player.playerName.asc())
-//                .fetch().stream().map(i->Map.of("playerName",i.get(player.playerName),"teamId",i.get(player.teamId.teamId),"position",i.get(player.position))).toList();
+        return jpaQueryFactory
+                .select(player.position, player.teamId.teamId, player.playerName)
+                .from(player)
+                .where(player.position.eq("GK")
+                        .and(player.teamId.teamId.in("K02", "K10")))
+                .orderBy(
+//                        jpaQueryFactory.select(team.teamName)
+//                                .from(team)
+//                                .where(team.teamId.eq(player.teamId.teamId)).fetch(),
+                        player.playerName.asc()
+                )
+                .fetch().stream().map(i->Map.of("playerName",i.get(player.playerName),"teamId",i.get(player.teamId.teamId),"position",i.get(player.position))).toList();
     }
+
+    @Override
+    public List<Map<String , String>> getOnCountAll(Pageable pageable) {
+
+        return jpaQueryFactory
+                .select(
+                player.teamId.teamId,player.playerName
+                ,player.position,player.name,player.backNo
+                ,player.nickname,player.solar,player.ePlayerName
+        ).from(player).offset(0).limit(3).fetch().stream().map(i->Map.of("teamId",i.get(player.teamId.teamId),"playerName",i.get(player.playerName)
+        ,"position",i.get(player.position),"name",i.get(player.name),"backNo",i.get(player.backNo),"nickname",i.get(player.nickname)
+        ,"solar",i.get(player.solar),"ePlayerName",i.get(player.ePlayerName)
+        )).toList();
+    }
+
+    @Override
+    public List<Map<String , String>> getOnPositionAndTeamId20DSL() {
+        return jpaQueryFactory.select(team.teamName, player.playerName, player.backNo)
+                .from(player)
+                .leftJoin(player.teamId, team)
+                .where(player.position.eq("MF"))
+                .fetch().stream().map(i->Map.of("teamName",i.get(team.teamName),"playerName",i.get(player.playerName),"backNo",i.get(player.backNo))).toList();
+    }
+
+    @Override
+    public List<Map<String , String>> getOnPositionAndTeamId21(Pageable pageable) {
+        return jpaQueryFactory.select(team.teamName, player.playerName, player.backNo)
+                .from(player)
+                .leftJoin(player.teamId, team)
+                .where(player.position.eq("MF"))
+                .offset(0)
+                .limit(3)
+                .fetch().stream().map(i->Map.of("teamName",i.get(team.teamName),"playerName",i.get(player.playerName),"backNo",i.get(player.backNo))).toList();
+    }
+
+    @Override
+    public List<Map<String , String>> getOnPositionAndTeamId2DSL() {
+        return jpaQueryFactory.select(player.position,player.teamId.teamId).from(player)
+                .where(player.position.eq("GK").and(player.teamId.teamId.eq(
+                        jpaQueryFactory.select(team.teamId).from(team).where(team.regionName.eq("수원")))))
+                .fetch().stream().map(i->Map.of("position",i.get(player.position),"teamId",i.get(player.teamId.teamId)
+                )).toList();
+    }
+
+    @Override
+    public List<Map<String , String>> getOnPositionAndTeamIdAndHeightDSL() {
+        return jpaQueryFactory.select(player.teamId.teamId,player.height,player.playerName)
+                .from(player)
+                .where(player.height.isNotEmpty()
+                        .and(player.playerName.like("고%"))
+                        .and(player.teamId.teamId
+                                .eq(jpaQueryFactory.select(team.teamId)
+                                        .from(team)
+                                        .where(team.regionName
+                                                .eq("수원"))
+                                ))).fetch()
+                .stream().map(i->Map.of(
+                        "teamId",i.get(player.teamId.teamId),"height",i.get(player.height)
+                        ,"playerName",i.get(player.playerName)
+                )).toList();
+    }
+
+
+    @Override
+    public Long countAllPlayers() {
+       Long count = jpaQueryFactory.select( player.count()).from(player).fetchFirst();
+        return count;
+    }
+
 
 
 }
