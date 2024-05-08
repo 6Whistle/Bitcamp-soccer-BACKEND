@@ -20,7 +20,12 @@ public class StadiumRouter {
             case "15" -> stadiumRepository.pohangSteelersGk();
             case "16" -> stadiumRepository.homeTeamWin();
             case "17" -> stadiumRepository.noHomeTeam();
-            case "test1" -> stadiumRepository.getAllStadiumsDSL();
+            case "DSL1" -> stadiumRepository.getAllStadiumsDSL();
+            case "DSL2" -> stadiumRepository.stadiumNameWithTeamDSL();
+            case "DSL3" -> stadiumRepository.stadiumAndTeamAndScheduleDSL();
+            case "DSL4" -> stadiumRepository.pohangSteelersGkDSL();
+            case "DSL5" -> stadiumRepository.homeTeamWinDSL();
+            case "DSL6" -> stadiumRepository.noHomeTeamDSL();
             default -> List.of();
         };
     }
