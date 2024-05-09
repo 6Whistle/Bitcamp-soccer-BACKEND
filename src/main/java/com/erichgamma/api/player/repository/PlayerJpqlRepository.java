@@ -62,6 +62,8 @@ public interface PlayerJpqlRepository   {
             "WHERE p.position = 'MF'")
     List<Map<String , Object>> getOnPositionAndTeamId20();
 
+
+
     @Query("SELECT new MAP ((SELECT t.teamName \n" +
             "        FROM team t\n" +
             "        WHERE t.teamId = p.teamId.teamId) as 소속팀,\n" +
@@ -99,6 +101,7 @@ public interface PlayerJpqlRepository   {
             "                       AND p.teamId.teamId =\n" +
             "                           (SELECT t.teamId FROM team t WHERE t.regionName = '수원')")
     List<Map<String, Object>> getPositionAndeRegion();
+
 
 
 //    @Query("SELECT new map(p)\n" +
