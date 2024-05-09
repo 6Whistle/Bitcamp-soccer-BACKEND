@@ -1,11 +1,14 @@
 package com.erichgamma.api.common.model;
 
+
 import org.springframework.stereotype.Component;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 @Component
 @Builder
@@ -56,3 +59,9 @@ public class PageDto {
             existNext = nextBlock < blockCount;
         }
 }
+
+
+
+
+
+

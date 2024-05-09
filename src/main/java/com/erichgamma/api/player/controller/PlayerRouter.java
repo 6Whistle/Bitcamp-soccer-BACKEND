@@ -1,7 +1,7 @@
 package com.erichgamma.api.player.controller;
 
 import com.erichgamma.api.common.model.Box;
-import com.erichgamma.api.common.model.PageDTO;
+import com.erichgamma.api.common.model.PageDto;
 import com.erichgamma.api.common.service.PageService;
 import com.erichgamma.api.common.service.impl.PageServiceImpl;
 import com.erichgamma.api.player.repository.PlayerRepository;
