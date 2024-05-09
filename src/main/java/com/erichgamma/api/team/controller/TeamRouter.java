@@ -46,7 +46,9 @@ public class TeamRouter {
                                         .filter(i -> i.getTeamId().equals("K02") || i.getTeamId().equals("K10"))
                                         .filter(i -> Double.parseDouble(i.getHeight()) >= 180 && Double.parseDouble(i.getHeight()) <= 183)
                                         .toList();
-            
+            case "get-height-avg" -> teamRepository.getHeightAvgByTeamDSL().stream()
+                                        .filter(i -> (Double)i.get("평균") < 176.59)
+                                        .toList();
             default -> List.of();
         };
     }

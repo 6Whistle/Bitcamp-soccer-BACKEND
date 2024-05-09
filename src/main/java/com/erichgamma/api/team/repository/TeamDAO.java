@@ -18,4 +18,5 @@ public interface TeamDAO{
     List<TeamDto> getAllTeamsDSL(Pageable pageable);
     List<Map<String, String>> getEmptyPositionDSL();
     List<PlayerDto> getPlayersHavingHeightDSL();
+    List<Map<String, Object>> getHeightAvgByTeamDSL();
 }

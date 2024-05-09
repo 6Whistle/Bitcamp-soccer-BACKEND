@@ -11,8 +11,11 @@ import com.erichgamma.api.player.model.QPlayerDto;
 import com.erichgamma.api.team.model.QTeam;
 import com.erichgamma.api.team.model.QTeamDto;
 import com.erichgamma.api.team.model.TeamDto;
+
+import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.PathBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
@@ -90,4 +93,19 @@ public class TeamDAOImpl implements TeamDAO{
                 .where(player.height.ne(""))
                 .fetch();
     }
+
+    @Override
+    public List<Map<String, Object>> getHeightAvgByTeamDSL() {
+        return queryFactory.select(team.teamId.as("팀ID"), team.teamName.as("팀명"), player.height.castToNum(Long.class).avg().multiply(100).round().divide(100).as("평균"))
+        .from(team)
+        .join(player)
+        .on(team.teamId.eq(player.teamId.teamId))
+        .fetchJoin()
+        .groupBy(team.teamId, team.teamName)
+        .fetch()
+        .stream()
+        .map(i -> Map.of("팀ID", i.get(0, Object.class), "팀명", i.get(1, Object.class), "평균", i.get(2, Object.class)))
+        .toList();
+    }
+
 }
