@@ -48,7 +48,9 @@ public interface PlayerJpqlRepository   {
             "    p.playerName")
     List<Map<String , Object>> getOnPositionAndTeamId10();
 
-    @Query("SELECT new map(p.teamId.teamId as teamId , p.playerName as playerName , p.position as position, p.name  as name, p.backNo as backNo, p.nickname as nickname, p.solar , p.ePlayerName) FROM player p ")
+    @Query("SELECT new map(p.teamId.teamId as teamId , p.playerName as playerName ," +
+            " p.position as position, p.name  as name, p.backNo as backNo, p.nickname as nickname," +
+            " p.solar , p.ePlayerName) FROM player p ")
     List<Map<String , Object>> getOnCountAll(Pageable pageable);
 
     @Query("SELECT new MAP ((SELECT t.teamName \n" +
@@ -59,6 +61,8 @@ public interface PlayerJpqlRepository   {
             ")FROM player p\n" +
             "WHERE p.position = 'MF'")
     List<Map<String , Object>> getOnPositionAndTeamId20();
+
+
 
     @Query("SELECT new MAP ((SELECT t.teamName \n" +
             "        FROM team t\n" +
@@ -99,6 +103,7 @@ public interface PlayerJpqlRepository   {
     List<Map<String, Object>> getPositionAndeRegion();
 
 
+
 //    @Query("SELECT new map(p)\n" +
 //            "FROM player p\n" +
 //            "JOIN (SELECT p2.team_id, ROUND(AVG(CAST((p2.height), 2)))avg\n" +
@@ -114,4 +119,6 @@ public interface PlayerJpqlRepository   {
             "                  FROM player tp\n" +
             "                  WHERE p.teamId.teamId = tp.teamId.teamId) AS double )")
     List<Map<String, Object>> getHeightAndTeamId();
+
+
 }

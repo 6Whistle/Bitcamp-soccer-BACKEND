@@ -1,6 +1,9 @@
 package com.erichgamma.api.player.repository;
 
+import org.springframework.data.domain.Pageable;
+
 import java.util.List;
+import java.util.Map;
 
 public interface PlayerDAO {
 
@@ -18,8 +21,20 @@ public interface PlayerDAO {
 
     List<?>getOnPositionAndTeamId10DSL();
 
+    List<?> getOnCountAll (Pageable pageable);
+
+    List<?> getOnPositionAndTeamId20DSL();
+
+    List<?> getOnPositionAndTeamId21DSL();
+
+    List<?>getOnPositionAndTeamId2DSL();
+
+    List<?>getOnPositionAndTeamIdAndHeightDSL();
+
+    List<?>getOnPositionAndHeightAndTeamIdDSL();
+    List<?>getPositionAndeRegionDSL();
+    List<?>getHeightAndTeamIdDSL();
 
 
-
-
+    Long countAllPlayers();
 }
